@@ -87,8 +87,9 @@ class Monoframe
 		require_once( dirname( __FILE__ ) . '/monoframe/awesome-app.php' );
 
 		//zoho
-		require_once( dirname( __FILE__ ) . '/monoframe/zoho-crm.php' );
-
+		//require_once( dirname( __FILE__ ) . '/monoframe/zoho-crm.php' );
+		require_once( dirname( __FILE__ ) . '/monoframe/zoho/zoho.php' );
+                        
 		//sync
 		require_once( dirname( __FILE__ ) . '/monoframe/sync/sync.php' );
 
