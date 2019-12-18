@@ -61,7 +61,6 @@ function awesome2_zoho_v2_crm($atts,$content=null,$shortcode){
 	$pieces=explode('.',$main);
 
 	$zoho=new aw2_zoho_v2_crm($pieces['0'],$pieces['1'],$atts,$content);
-	echo " HERE ";
 	$return_value=$zoho->run();
 
 	$return_value=\aw2_library::post_actions('all',$return_value,$atts);
@@ -115,11 +114,8 @@ class aw2_zoho_v2_crm{
 
     public function run(){
         $return_value='';
-		
-		echo get_class($this);
-		
+	
         if (method_exists($this, $this->action)){
-			echo " Calling: " . $this->action;
             return call_user_func(array($this, $this->action));
         }else {
             return "invalied function call...";
@@ -149,12 +145,10 @@ class aw2_zoho_v2_crm{
         $start_index = $this->atts['start_index'];
         $end_index = $this->atts['end_index'];
 
-echo " Calling CRM library now, module: " . $this->module;
 
         $response = array();
         if(!empty($this->module)){
             $result =  $this->zoho_crm->getRecords($this->module,null ,$field_api_name,$sort_order,$start_index,$end_index,null);
-			print_r($result);
             if(isset($result['aws_status'])){
                 unset($result['aws_status']);
                 $response = array('status'=>'success','response'=>$result);
@@ -248,13 +242,8 @@ echo " Calling CRM library now, module: " . $this->module;
     private function createRecords(){
         $args = $this->args();
         $response = array();
-print_r($this->module);
-print_r($args);
         if(!empty($this->module) && !empty($args)){
-		echo " IN ";
             foreach ($args['rows'] as $value) {
-			
-			echo " In foreach";
 			
                 $result =  $this->zoho_crm->createRecords($this->module,$value);
                 if($result['aws_status'] === 1){
@@ -309,7 +298,6 @@ print_r($args);
 
     private function getZohoRefreshToken() {
         $result =  $this->zoho_crm->getZohoRefreshToken();
-		print_r($result);
         return $result;
     }
 
