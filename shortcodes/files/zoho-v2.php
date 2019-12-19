@@ -6,7 +6,6 @@ aw2_library::add_shortcode('zoho','crm', 'awesome2_zoho_v2_crm','Runs Zoho.com C
  
 function awesome2_zoho_v2_crm($atts,$content=null,$shortcode){
     
-    /*
     if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
     
     extract( shortcode_atts( array(
@@ -24,7 +23,6 @@ function awesome2_zoho_v2_crm($atts,$content=null,$shortcode){
     unset($pieces);
     return $return_value;
     
-    */
 }
 
 function awesome2_zoho_v2_config($atts,$content=null,$shortcode){
@@ -66,8 +64,13 @@ class aw2_zoho_v2_crm{
         $this->action=$action;
         $this->atts=$atts;
         $this->content=trim($content);
-
-        $_SERVER['user_email_id'] = $GLOBALS['zoho_config']['zoho_userIdentifier_email'];		
+//        echo "<pre>";
+//        print_r($GLOBALS['zoho_config']);
+//        echo "</pre>";
+//        exit;
+        $_SERVER['user_email_id'] = trim($GLOBALS['zoho_config']['zoho_userIdentifier_email']);
+        
+            //D:/laragon/www/zoho-token/
         $this->zoho_crm = new \zohoMain();
     }
 

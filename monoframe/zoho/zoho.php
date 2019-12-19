@@ -195,6 +195,30 @@ class zohoMain{
     }
     
     public function getRecord($module,$id){
+        print_r($_SERVER);
+        try{
+            
+            $record=ZCRMRecord::getInstance("Leads",null);
+            $record->setFieldValue("Last_Name","Robert");
+            $record->setFieldValue("Company","ZOHO");
+            $record->setFieldValue('$approved',false);
+
+            $responseIns=$record->create();
+            echo "\n\n";
+            echo "HTTP Status Code:".$responseIns->getHttpStatusCode().",";
+            echo "Status:".$responseIns->getStatus().",";
+            echo "Message:".$responseIns->getMessage().",";
+            echo "Code:".$responseIns->getCode().",";
+            echo "Details:".json_encode($responseIns->getDetails()).",";
+
+            $createdRecord=$responseIns->getData();
+            echo "EntityId:".$createdRecord->getEntityId().",";
+        }catch (ZCRMException $e){
+            echo $e->getCode()."\n";
+            echo $e->getMessage()."\n";
+            echo $e->getExceptionCode()."\n";
+        }
+/*
         try{
             $moduleIns = ZCRMRestClient::getInstance()->getModuleInstance($module); //To get record instance
             $record = $moduleIns->getRecord($id);
@@ -207,6 +231,8 @@ class zohoMain{
             $response['file'] = $ex->getFile();
         }
         return $response;
+
+ */
     }
     
     private function getSingle($record){
