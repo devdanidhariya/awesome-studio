@@ -1,71 +1,30 @@
 <?php
+aw2_library::add_shortcode('zoho','config', 'awesome2_zoho_v2_config','Runs Zoho.com CRM API Actions');
 
+aw2_library::add_shortcode('zoho','crm', 'awesome2_zoho_v2_crm','Runs Zoho.com CRM API Actions');
 
-/**
-Step 1: Create folders
-[zohov2.config makeZohoAttachmentFolder  set="module.t" /]
-[aw2.get module.t dump="true" /]
-[zohov2.config makeZohoTokenFolder set="module.getZohoRefreshToken" /]
-[aw2.get module.getZohoRefreshToken dump="true" /]
-Scope: ZohoCRM.modules.ALL
-Redirect URI should be same in the "Client Edit"
-[zohov2.crm config.getZohoRefreshToken set="module.getZohoRefreshToken" /]
-[aw2.get module.getZohoRefreshToken dump="true" /]
-**/
-
-/**
-[zohov2.crm Leads.getRecords field_api_name="Industry"  sort_order="desc" start_index=1 end_index=50 set="module.results" /]
-[aw2.get module.results.dump /]
-[aw2.get module.Records dump=true /]
-
-[zohov2.crm Leads.getAllCustomViews set="module.getAllCustomViews" /]
-[zohov2.crm module.getAllCustomViews dump=true /]
-**/
-
-/*
-
-[zohov2.config getSetZohoConfig  set="module.t" /]
-[zohov2.crm Leads.createRecord set="module.results"]
-     {
-       "wfTrigger" :"true",
-       "xmlData":[{
-        "Lead Source" : "V2 testing",
-        "Lead Type" : "Space Service Seeker",
-        "Location / City": "Pune",
-        "Workspace Types" : "Ignore",
-        "Last Name" : "Patil",
-        "Email" : "test@t.com",
-        "Mobile" : "8830427606",
-        "Company": "testing",
-        "Description" : "this is just test"
-        }]
-      }
-   [/zohov2.crm]
-
-  [aw2.get dump  /]
-  [aw2.get module.t dump=true  /]
-*/
-
-
-aw2_library::add_shortcode('zohov2','crm', 'awesome2_zoho_v2_crm','Runs Zoho.com CRM API Actions');
-aw2_library::add_shortcode('zohov2','config', 'awesome2_zoho_v2_config','Runs Zoho.com CRM API Actions');
  
 function awesome2_zoho_v2_crm($atts,$content=null,$shortcode){
-	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
-	'main'=>null,
-	), $atts) );
-	unset($atts['main']);
-	
-	$return_value='';
-	$pieces=explode('.',$main);
+    
+    /*
+    if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
+    
+    extract( shortcode_atts( array(
+    'main'=>null,
+    ), $atts) );
+    unset($atts['main']);
 
-	$zoho=new aw2_zoho_v2_crm($pieces['0'],$pieces['1'],$atts,$content);
-	$return_value=$zoho->run();
+    $return_value='';
+    $pieces=explode('.',$main);
+    
+    $zoho=new aw2_zoho_v2_crm($pieces['0'],$pieces['1'],$atts,$content);
+    $return_value=$zoho->run();
 
-	$return_value=\aw2_library::post_actions('all',$return_value,$atts);
-        unset($pieces);
-	return $return_value;
+    $return_value=\aw2_library::post_actions('all',$return_value,$atts);
+    unset($pieces);
+    return $return_value;
+    
+    */
 }
 
 function awesome2_zoho_v2_config($atts,$content=null,$shortcode){

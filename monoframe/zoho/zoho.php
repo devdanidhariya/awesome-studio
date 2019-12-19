@@ -64,7 +64,6 @@ class awsZohoConfig {
 
 $awsZohoConfig = new awsZohoConfig();
 
-
 class zohoMain{
     
     public function __construct() {
@@ -123,7 +122,7 @@ class zohoMain{
             
         } catch (Exception $ex) {
             $response['status'] = 'error';
-            $response['message'] = $ex->getMessage();
+            $response['message'] = $ex->getMessage()."ccccccc";
         }
         return $response;
     }
