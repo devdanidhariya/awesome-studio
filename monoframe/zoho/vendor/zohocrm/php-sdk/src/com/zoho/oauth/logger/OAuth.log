@@ -244,3 +244,4 @@
 #22 D:\laragon\www\studio\wp-blog-header.php(16): wp()
 #23 D:\laragon\www\studio\index.php(17): require('D:\\laragon\\www\\...')
 #24 {main}
+2019-12-20 06:19:25 INFO: Access Token has expired. Hence refreshing.
