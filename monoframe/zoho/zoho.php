@@ -79,6 +79,7 @@ class zohoMain{
                                     "&client_id=".$ZohoConfig['zoho_client_id'].
                                     "&client_secret=".$ZohoConfig['zoho_client_secret'].
                                     "&grant_type=authorization_code";
+        
         $curl_config =  array(
                             CURLOPT_URL => "$zoho_curl",
                             CURLOPT_RETURNTRANSFER => true,
@@ -122,7 +123,7 @@ class zohoMain{
             
         } catch (Exception $ex) {
             $response['status'] = 'error';
-            $response['message'] = $ex->getMessage()."ccccccc";
+            $response['message'] = $ex->getMessage();
         }
         return $response;
     }
@@ -197,14 +198,11 @@ class zohoMain{
     public function getRecord($module,$id){
         try{
             $moduleIns = ZCRMRestClient::getInstance()->getModuleInstance($module); //To get record instance
-            
             $record = $moduleIns->getRecord($id);
-                
             $record = $record->getData();  //To get response data         
             $response['data'] = self::getSingle($record);
             $response['aws_status'] = 1;
         }catch (ZCRMException $ex){
-           
             $response['message'] = $ex->getMessage();  //To get ZCRMException error message
             $response['code'] = $ex->getExceptionCode();  //To get ZCRMException error code
             $response['file'] = $ex->getFile();
